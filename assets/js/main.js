@@ -12,9 +12,9 @@ import {Router, Route, browserHistory, IndexRoute} from 'react-router'
 import store from './reducers/index'
 import { creators } from './reducers/actions'
 
-function handleSourceChange(prevState){
-   if(prevState.params.source !== location.pathname){
-       store.dispatch(creators.news(store.dispatch, prevState.params.source))
+function handleSourceChange(nextState){
+   if(nextState.params.source !== location.pathname){
+       store.dispatch(creators.news(store.dispatch, nextState.params.source))
    }
 }
 
