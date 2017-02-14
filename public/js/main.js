@@ -31,17 +31,23 @@ var Source = function (_Component) {
     function Source() {
         _classCallCheck(this, Source);
 
-        return _possibleConstructorReturn(this, (Source.__proto__ || Object.getPrototypeOf(Source)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (Source.__proto__ || Object.getPrototypeOf(Source)).call(this));
+
+        _this.imageLoad = _this.imageLoad.bind(_this);
+        return _this;
     }
 
     _createClass(Source, [{
         key: 'imageLoad',
         value: function imageLoad(e) {
             e.target.style.opacity = 1;
+            this.placeholder.style.display = 'none';
         }
     }, {
         key: 'render',
         value: function render() {
+            var _this2 = this;
+
             var _props = this.props,
                 urlToImage = _props.urlToImage,
                 title = _props.title,
@@ -55,6 +61,9 @@ var Source = function (_Component) {
                 _react2.default.createElement(
                     'div',
                     { className: 'card-image' },
+                    _react2.default.createElement('img', { src: 'https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif', ref: function ref(node) {
+                            return _this2.placeholder = node;
+                        }, className: 'placeholder', alt: '' }),
                     _react2.default.createElement('img', { src: urlToImage, alt: title, onLoad: this.imageLoad }),
                     _react2.default.createElement(
                         'span',
@@ -402,7 +411,7 @@ var App = function (_Component) {
                     { id: 'root', className: 'row' },
                     _react2.default.createElement(
                         'div',
-                        { className: 'col s4 list' },
+                        { className: 'col s3 list' },
                         _react2.default.createElement(
                             'h1',
                             null,
@@ -412,7 +421,7 @@ var App = function (_Component) {
                     ),
                     _react2.default.createElement(
                         'div',
-                        { className: 'col s8 right' },
+                        { className: 'col s5 offset-s3' },
                         this.props.children
                     )
                 )
@@ -460,9 +469,9 @@ var _actions = require('./reducers/actions');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function handleSourceChange(prevState) {
-    if (prevState.params.source !== location.pathname) {
-        _index2.default.dispatch(_actions.creators.news(_index2.default.dispatch, prevState.params.source));
+function handleSourceChange(nextState) {
+    if (nextState.params.source !== location.pathname) {
+        _index2.default.dispatch(_actions.creators.news(_index2.default.dispatch, nextState.params.source));
     }
 }
 
@@ -472,7 +481,6 @@ function handleSourceChange(prevState) {
     _react2.default.createElement(
         _reactRouter.Route,
         { path: '/', component: _app2.default },
-        _react2.default.createElement(_reactRouter.IndexRoute, { component: _app2.default }),
         _react2.default.createElement(_reactRouter.Route, { path: '/:source', component: _Feed2.default, onEnter: handleSourceChange })
     )
 ), document.getElementById('app'));

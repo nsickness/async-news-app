@@ -9,14 +9,20 @@ import { Link } from 'react-router'
 
 
 export default class Source extends  Component {
+    constructor(){
+        super();
+        this.imageLoad = this.imageLoad.bind(this)
+    }
     imageLoad(e){
         e.target.style.opacity = 1;
+        this.placeholder.style.display = 'none';
     }
     render(){
         let {urlToImage, title, url, description, author} = this.props;
         return(
             <div className="card">
                 <div className="card-image">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" ref={node => this.placeholder = node} className="placeholder" alt=""/>
                     <img src={urlToImage} alt={title} onLoad={this.imageLoad} />
                     <span className="card-title">{title}</span>
                 </div>
@@ -36,3 +42,5 @@ export default class Source extends  Component {
 Source.contextTypes = {
     store: PropTypes.object
 }
+
+

@@ -22,7 +22,6 @@ render(
 
     <Router history={browserHistory}>
         <Route path="/" component={App}>
-            <IndexRoute  component={App} />
             <Route path="/:source" component={Feed} onEnter={handleSourceChange}/>
         </Route>
     </Router>,

@@ -20,11 +20,11 @@ export default class App extends Component{
        return (
            <Provider store={store}>
                <div id="root" className="row">
-                   <div className="col s4 list">
+                   <div className="col s3 list">
                         <h1>Sources:</h1>
                         <SourcesList />
                    </div>
-                   <div className="col s8 right">
+                   <div className="col s5 offset-s3">
                        {this.props.children}
                    </div>
                   

@@ -5803,10 +5803,6 @@ button.picker__close:focus
  */.picker--time .picker__box
 {
     font-size: 1em;padding: 0;background: #f2f2f2;
-}img
-{transition: opacity .2s ease-out;
-
-    opacity: 0;
 }#root
 {
     overflow: hidden;
@@ -5814,6 +5810,16 @@ button.picker__close:focus
 {position: fixed;top: 0;left: 0;overflow-y: scroll;
 
     height: 100vh;
+}.card .card-image
+{position: relative;overflow: hidden;
+
+    padding-bottom: 50%;
+}.card .card-image img.placeholder
+{
+    opacity: 1;
+}.card .card-image img
+{
+    position: absolute;top: 50%;left: 50%;transition: opacity .2s ease-out;transform: translate3d(-50%, -50%, 0);opacity: 0;
 }@font-face
 {
     font-family: 'Roboto';font-weight: 200;src: local(Roboto Thin), url('../fonts/roboto/Roboto-Thin.eot');src: url('../fonts/roboto/Roboto-Thin.eot?#iefix') format('embedded-opentype'), url('../fonts/roboto/Roboto-Thin.woff2') format('woff2'), url('../fonts/roboto/Roboto-Thin.woff') format('woff'), url('../fonts/roboto/Roboto-Thin.ttf') format('truetype');

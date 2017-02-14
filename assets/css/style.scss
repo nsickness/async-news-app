@@ -1,11 +1,6 @@
 @import "../../node_modules/materialize-css/dist/css/materialize";
 
 
-img{
-  opacity:0;
-  transition: opacity .2s ease-out;
-}
-
 #root{
   overflow: hidden;
 }
@@ -15,4 +10,22 @@ img{
   position: fixed;
   top: 0;
   left: 0;
+}
+
+.card .card-image{
+  padding-bottom: 50%;
+  position: relative;
+  overflow: hidden;
+  img.placeholder{
+
+    opacity:1;
+  }
+  img{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%,-50%,0);
+    opacity:0;
+    transition: opacity .2s ease-out;
+  }
 }
