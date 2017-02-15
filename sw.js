@@ -11,8 +11,8 @@ console.info("SW startup");
 var CACHE_NAME = 'news-app-cache';
 var urlsToCache = [
     '/',
-    '/public/css/style.css',
-    '/public/js/main.js',
+    '/public/css/style.min.css',
+    '/public/js/main.min.js',
     '/public/fonts/roboto/Roboto-Regular.woff2',
     '/public/fonts/roboto/Roboto-Regular.woff',
     '/public/fonts/roboto/Roboto-Regular.ttf',
