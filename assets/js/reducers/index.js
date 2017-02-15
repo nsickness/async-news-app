@@ -20,6 +20,6 @@ const store = createStore(
     applyMiddleware(promiseMiddleware)
 );
 
-store.dispatch(creators.sources(store.dispatch))
+store.dispatch(creators.sources(store.dispatch));
 
 export default store;
