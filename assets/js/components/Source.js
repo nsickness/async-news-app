@@ -8,12 +8,13 @@ import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
 
 
-export default class Source extends  Component {
+export default class Source extends Component {
     imageLoad(e){
         e.target.style.opacity = 1;
     }
     render(){
         let {image, title, href, description} = this.props;
+        
         return(
             <div className="">
                 <Link to={href}>
@@ -26,12 +27,7 @@ export default class Source extends  Component {
                         </div>
                     </div>
                 </Link>
-
             </div>
         )
     }
-}
-
-Source.contextTypes = {
-    store: PropTypes.object
 }

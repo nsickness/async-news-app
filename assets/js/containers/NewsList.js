@@ -5,16 +5,16 @@
 'use strict';
 
 import {connect} from 'react-redux'
-import Sources from './../components/Sources'
+import News from './../components/News'
 
 const mapStateToProps = (state) => {
     return {
-        sources: state.sources.data.sources
+        news: state.news.data
     }
 };
 
-const SourcesList = connect(
+const NewsList = connect(
     mapStateToProps
-)(Sources);
+)(News);
 
-export default SourcesList
+export default NewsList

@@ -5,34 +5,30 @@
 'use strict';
 
 import React, { Component, PropTypes } from 'react'
+import {Router, Route, browserHistory, IndexRoute} from 'react-router'
 import {Provider} from 'react-redux'
+import { creators } from './../reducers/actions'
 import store from './../reducers/index'
-import SourcesList from './SourcesList'
+import NewsList from './NewsList'
+import Root from './../components/Root'
+
 
 export default class App extends Component{
-    
-    componentDidMount(){
-        
-        let unsubscribe = store.subscribe(()=>this.forceUpdate());
-
+    handleSourceChange(nextState){
+        if(nextState.params.source !== location.pathname){
+            store.dispatch(creators.news(store.dispatch, nextState.params.source))
+        }
     }
     render(){
-       return (
-           <Provider store={store}>
-               <div id="root" className="row">
-                   <div className="col s3 list">
-                        <h1>Sources:</h1>
-                        <SourcesList />
-                   </div>
-                   <div className="col s5 offset-s3">
-                       {this.props.children}
-                   </div>
-                  
-               </div>
-           </Provider>
-       )
+        return (
+            <Provider store={store}>
+                <Router history={browserHistory}>
+                    <Route path="/" component={Root}>
+                        <Route path="/:source" component={NewsList} onEnter={this.handleSourceChange}/>
+                    </Route>
+                </Router>
+            </Provider>
+        )
     }
 }
-App.childContextTypes = {
-    store: PropTypes.object
-};
+

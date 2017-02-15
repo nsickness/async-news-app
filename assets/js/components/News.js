@@ -1,22 +1,22 @@
 /**
- * Created by Nikita on 2/8/17.
+ * Created by Nikita on 2/15/17.
  */
 
 'use strict';
 
 import React, { Component, PropTypes } from 'react'
-import Article from './../components/Article'
+import Article from './Article'
 
-export default class Feed extends Component{
+export default class News extends Component{
     componentDidUpdate(){
         document.title =  this.props.params.source
     }
     render(){
-        const store = this.context.store.getState().news;
-        if(!store.data) {
+
+        if(!this.props.news) {
             return <div>Loading...</div>
         }
-        let articles = store.data.articles.map((article, i) =>{
+        let articles = this.props.news.articles.map((article, i) =>{
             return (
                 <Article key={i} {...article} />
             )
@@ -29,6 +29,6 @@ export default class Feed extends Component{
     }
 }
 
-Feed.contextTypes ={
+News.contextTypes ={
     store: PropTypes.object
 };

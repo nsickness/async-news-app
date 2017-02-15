@@ -7,7 +7,6 @@
 import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
 
-
 export default class Source extends  Component {
     constructor(){
         super();
@@ -37,10 +36,6 @@ export default class Source extends  Component {
         )
     }
     
-}
-
-Source.contextTypes = {
-    store: PropTypes.object
 }
 
 
