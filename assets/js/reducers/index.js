@@ -14,12 +14,25 @@ const reducer = combineReducers({
     news: createReducer(types.news)
 });
 
-const store = createStore(
-    reducer,
-    {},
-    applyMiddleware(promiseMiddleware)
-);
+const appCache = localStorage.getItem('@appCache');
 
-store.dispatch(creators.sources(store.dispatch));
+let store;
+
+if(!navigator.onLine && appCache){
+    let offlineStorage = function(state = JSON.parse(appCache)) {
+       return state
+    };
+    store = createStore(offlineStorage);
+} else{
+    store = createStore(
+        reducer,
+        {},
+        applyMiddleware(promiseMiddleware)
+    );
+    store.dispatch(creators.sources(store.dispatch));
+    store.subscribe(()=>{
+        localStorage.setItem('@appCache', JSON.stringify(store.getState()))
+    })
+}
 
 export default store;

@@ -15,7 +15,7 @@ import Root from './../components/Root'
 
 export default class App extends Component{
     handleSourceChange(nextState){
-        if(nextState.params.source !== location.pathname){
+        if(nextState.params.source !== location.pathname && navigator.onLine){
             store.dispatch(creators.news(store.dispatch, nextState.params.source))
         }
     }

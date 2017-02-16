@@ -494,7 +494,7 @@ var App = function (_Component) {
     _createClass(App, [{
         key: 'handleSourceChange',
         value: function handleSourceChange(nextState) {
-            if (nextState.params.source !== location.pathname) {
+            if (nextState.params.source !== location.pathname && navigator.onLine) {
                 _index2.default.dispatch(_actions.creators.news(_index2.default.dispatch, nextState.params.source));
             }
         }
@@ -535,6 +535,8 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactDom = require('react-dom');
 
+var _reactRouter = require('react-router');
+
 var _app = require('./containers/app');
 
 var _app2 = _interopRequireDefault(_app);
@@ -544,12 +546,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 (0, _reactDom.render)(_react2.default.createElement(_app2.default, null), document.getElementById('app'));
 
 if ('serviceWorker' in navigator) {
+
     window.addEventListener('load', function () {
-        navigator.serviceWorker.register('sw.js').then(function (registration) {}).catch(function (err) {});
+        navigator.serviceWorker.register('sw.js', { scope: '.' }).then(function (registration) {}).catch(function (err) {});
     });
 }
 
-},{"./containers/app":8,"react":567,"react-dom":368}],10:[function(require,module,exports){
+window.onoffline = function () {
+    _reactRouter.browserHistory.push('/');
+};
+
+},{"./containers/app":8,"react":567,"react-dom":368,"react-router":536}],10:[function(require,module,exports){
 /**
  * Created by Nikita on 2/8/17.
  */
@@ -620,9 +627,24 @@ var reducer = (0, _redux.combineReducers)({
     news: (0, _reduxRestApi.createReducer)(_actions.types.news)
 });
 
-var store = (0, _redux.createStore)(reducer, {}, (0, _redux.applyMiddleware)(_reduxPromise2.default));
+var appCache = localStorage.getItem('@appCache');
 
-store.dispatch(_actions.creators.sources(store.dispatch));
+var store = void 0;
+
+if (!navigator.onLine && appCache) {
+    var offlineStorage = function offlineStorage() {
+        var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : JSON.parse(appCache);
+
+        return state;
+    };
+    store = (0, _redux.createStore)(offlineStorage);
+} else {
+    store = (0, _redux.createStore)(reducer, {}, (0, _redux.applyMiddleware)(_reduxPromise2.default));
+    store.dispatch(_actions.creators.sources(store.dispatch));
+    store.subscribe(function () {
+        localStorage.setItem('@appCache', JSON.stringify(store.getState()));
+    });
+}
 
 exports.default = store;
 
