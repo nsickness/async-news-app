@@ -18,6 +18,15 @@ var urlsToCache = [
     '/public/fonts/roboto/Roboto-Regular.woff2',
     '/public/fonts/roboto/Roboto-Regular.woff',
     '/public/fonts/roboto/Roboto-Regular.ttf',
+    '/async-news-app',
+    '/async-news-app/index.html',
+    '/async-news-app/public/css/style.min.css',
+    '/async-news-app/public/css/style.css',
+    '/async-news-app/public/js/main.min.js',
+    '/async-news-app/public/js/main.js',
+    '/async-news-app/public/fonts/roboto/Roboto-Regular.woff2',
+    '/async-news-app/public/fonts/roboto/Roboto-Regular.woff',
+    '/async-news-app/public/fonts/roboto/Roboto-Regular.ttf',
     'https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif'
 ];
 
