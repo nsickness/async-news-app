@@ -19,7 +19,6 @@ export const creators = {
 
         return createAction({
             endpoint: `${API_URL}/sources?language=en`,
-            fetch: {},
             types: types.sources,
             dispatch
         })
@@ -28,7 +27,6 @@ export const creators = {
 
         return createAction({
             endpoint: `${API_URL}/articles?source=${source}&apiKey=${API_KEY}`,
-            fetch: {cors:true},
             types: types.news,
             dispatch
         })
